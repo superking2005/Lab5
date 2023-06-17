@@ -1,6 +1,6 @@
 // CIS 22C: Lab 5: Hash Tables
 // Alexander Mochizuki and Saranya Kolachana
-// 
+// Store and retrieve values using a hash table.
 
 package lab5;
 import java.util.*;
@@ -18,7 +18,11 @@ public class Lab5Main {
 		HashTable kroneHashTable = new HashTable(29);
 
 		for (double seedVal : seedArray) {
-			kroneHashTable.insert(new Krone(seedVal));
+			try {
+				kroneHashTable.insert(new Krone(seedVal));
+			} catch (Exception e) {
+				
+			}
 		}
 
 		System.out.println("# items in kroneHashTable: " + kroneHashTable.getNumItems());
@@ -50,7 +54,8 @@ public class Lab5Main {
 			try {
 				userSaysTerminate = (scnr.nextInt() == 2);
 			} catch (Exception e) {
-				System.out.println("Assuming that's not 2.");
+				String notOneOrTwo = scnr.next();
+				System.out.println(notOneOrTwo + " Is not 1 or 2. Running another loop.");
 			}
 			// End of while
 		}
