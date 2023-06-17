@@ -1,3 +1,7 @@
+// CIS 22C: Lab 5: Hash Tables
+// Alexander Mochizuki and Saranya Kolachana
+// Store and retrieve values using a hash table.
+
 package lab5;
 
 public class HashTable {
@@ -10,11 +14,48 @@ public class HashTable {
 	private final int c2 = 1;
 	private boolean[] emptySinceStart = {true};
 	
+	
+	
+	public int getNumItems() {
+		return numItems;
+	}
+
+	public double getLoadFactor() {
+		return loadFactor;
+	}
+
+	public int getNumTotalCollisions() {
+		return numTotalCollisions;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setNumItems(int numItems) {
+		this.numItems = numItems;
+	}
+
+	public void setLoadFactor(double loadFactor) {
+		this.loadFactor = loadFactor;
+	}
+
+	public void setNumTotalCollisions(int numTotalCollisions) {
+		this.numTotalCollisions = numTotalCollisions;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
 	public HashTable(int numBuckets) {
+		// TODO: Prevent negative size.
 		size = numBuckets;
 		table = new Currency[numBuckets];
 		emptySinceStart = new boolean[numBuckets];
-		emptySinceStart.fill(true);
+		for (int i = 0; i < size; i++) {
+			emptySinceStart[i] = true;
+		}
 	}
 	
 	private int hash(Currency item) {
@@ -41,6 +82,7 @@ public class HashTable {
 			if (table[bucket] == null) {
 				table[bucket] = item;
 				emptySinceStart[bucket] = false;
+				calcLoadFactor();
 				return true;
 			}
 			numTotalCollisions++;
@@ -73,10 +115,30 @@ public class HashTable {
 			return false;
 		}
 		table[bucket] = null;
+		calcLoadFactor();
 		return true;
 	}
 	
 	private void resize() {
 		
 	}
+	
+	private double calcLoadFactor() {
+		countNumItems();
+		loadFactor = (double) numItems / size;
+		return loadFactor;
+	}
+	
+	private int countNumItems() {
+		numItems = 0;
+		for (int i = 0; i < size ; i++) {
+			if (table[i] != null) {
+				numItems++;
+			}
+			
+		}
+		return numItems;
+	}
+	
+	
 }
