@@ -1,6 +1,6 @@
-// Lab 5 - Hash Tables
-// Alexander Mochizuki & Saranya Kolachana
-// Utilize hash tables
+// CIS 22C: Lab 5: Hash Tables
+// Alexander Mochizuki and Saranya Kolachana
+// Store and retrieve values using a hash table.
 
 package lab5;
 
